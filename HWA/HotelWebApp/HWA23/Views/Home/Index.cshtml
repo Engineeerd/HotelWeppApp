@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = " Home ";
+}
+
+<main>
+    <h1> HOTELS SEARCH </h1>
+    <br>
+    <div>
+        <form id="form-data">
+            <div class="form-group">
+                <label for="location">Where</label>
+                <input type="text" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="checkIn">Check In</label>
+                <input type="text" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="checkOut">Check Out</label>
+                <input type="text" class="form-control">
+            </div>
+
+            <br />
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</main>
+
+@section Scripts {
+    <script setup>
+        //import axios from 'axios';
+        //import { onMounted, ref } from "vue";
+
+        const obj = ref({});
+
+        axios({
+            method: 'get',
+            url: 'api/hotels/countries',
+            responseType: 'stream'
+        }).then(function (response) {
+            var responseObject = JSON.parse(response.data);
+            console.log(response.data);
+            console.log(responseObject);
+
+            obj.value = responseObject;
+        });
+    </script>
+}
