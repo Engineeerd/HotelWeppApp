@@ -1,21 +1,12 @@
-﻿//using Newtonsoft.Json;
-
-//namespace HWA.Models
-//{
-//    public class Hotel
-//    {
-//        [JsonProperty("@type")]
-//        public string type { get; set; }
-//        public string index { get; set; }
-//        public string gaiaId { get; set; }
-//        public RegionNames regionNames { get; set; }
-//        public EssId essId { get; set; }
-//        public Coordinates coordinates { get; set; }
-//        public HierarchyInfo hierarchyInfo { get; set; }
-//        public string isMinorAirport { get; set; }
-//        public string hotelId { get; set; }
-//        public string cityId { get; set; }
-//        public HotelAddress hotelAddress { get; set; }
-//        public string subtype { get; set; }
-//    }
-//}
+﻿namespace HWA23.Models
+{
+    public class Hotel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
+        public string Image { get; set; }
+        public bool Available { get; set; }
+        public double RegionId { get; set; }
+    }
+}

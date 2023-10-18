@@ -1,50 +1,47 @@
 ﻿@{
-    ViewBag.Title = " Home ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<main>
-    <h1> HOTELS SEARCH </h1>
-    <br>
-    <div>
-        <form id="form-data">
-            <div class="form-group">
-                <label for="location">Where</label>
-                <input type="text" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="checkIn">Check In</label>
-                <input type="text" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="checkOut">Check Out</label>
-                <input type="text" class="form-control">
-            </div>
-
+@*<div class="container">
+        <main>
+            <h1>Hotels Web App</h1>
             <br />
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+            <input class="form-control" placeholder="Search Hotel..." />
+            <br />
+            <button type="button" class="btn btn-primary" v-on:click="count++">Primary</button>
+        </main>
+    </div>*@
+
+
+<main role="main">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Hello, world!</h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        </div>
     </div>
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Heading</h2>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Heading</h2>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Heading</h2>
+                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+        </div>
+        <hr>
+    </div> <!-- /container -->
 </main>
-
-@section Scripts {
-    <script setup>
-        //import axios from 'axios';
-        //import { onMounted, ref } from "vue";
-
-        const obj = ref({});
-
-        axios({
-            method: 'get',
-            url: 'api/hotels/countries',
-            responseType: 'stream'
-        }).then(function (response) {
-            var responseObject = JSON.parse(response.data);
-            console.log(response.data);
-            console.log(responseObject);
-
-            obj.value = responseObject;
-        });
-    </script>
-}
