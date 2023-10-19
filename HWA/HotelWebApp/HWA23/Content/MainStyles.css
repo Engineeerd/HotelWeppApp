@@ -1,5 +1,196 @@
 ﻿/* VUE WEB APP STYLES */
 
-main .jumbotron {
+body {
+    background-color: whitesmoke;
+    font-family: 'lato', sans-serif !important;
+}
+
+.loader {
+    background-color: rgba(0, 0, 0, 0.95);
+    position: fixed;
+    overflow: hidden;
+    min-width: 100vw;
+    max-width: 100vw;
+    min-height: 100vh;
+    max-height: 100vh;
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+}
+
+.bg-dark {
+    background-color: black !important;
+}
+
+.nav-link {
+    color: lightblue;
+}
+
+.nav-search-div {
+    display: flex;
+    margin-right: 0.5rem;
+}
+
+.nav-search-input {
+    margin-right: 0.2rem;
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.0;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border-radius: var(--bs-border-radius);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+}
+
+main {
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100vw;
+    display: flex !important;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.date-pickers {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.date-picker-form-control {
+    padding: 0.375rem 0.75rem;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+}
+
+.check-in-datepicker, .check-out-datepicker {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+    .check-in-datepicker label, .check-out-datepicker label {
+        margin-right: 0.5rem;
+    }
+
+.display-3 {
+    font-weight: bold;
+}
+
+.messageText {
+    font-style: italic;
+    text-align: center;
+    color: red;
+}
+
+.container {
     margin-top: 5rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    margin-bottom: 4rem;
+}
+
+.row > * {
+    max-width: 48%;
+}
+
+.card {
+    padding: 1rem;
+    display: flex;
+    margin: 0.2rem;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+    .card .card-image {
+        margin-right: 1rem;
+    }
+
+        .card .card-image img {
+            background-size: 100% 100%;
+            object-fit: cover;
+        }
+
+    .card .card-description .hotel-title {
+        font-weight: bold;
+    }
+
+    .card card-description p {
+        margin-bottom: 0rem !important;
+    }
+
+.bg-body-tertiary {
+    background-color: #404040 !important;
+    color: aliceblue;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.search-input {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.text-muted {
+    color: white !important;
+}
+
+.search-button-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.search-button {
+    margin-top: 0.5rem;
+    min-width: 25%;
+    max-width: 25%;
+    padding: 0.6rem;
+}
+
+@media (max-width: 346px) {
+    .nav-search-div {
+        display: none;
+        margin-right: 0.5rem;
+    }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HWA23.Models
+﻿namespace HWA23.Models
 {
     public class Region
     {
