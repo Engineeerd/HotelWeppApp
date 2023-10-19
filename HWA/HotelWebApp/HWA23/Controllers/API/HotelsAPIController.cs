@@ -1,40 +1,58 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Net.Http;
 using System.Web.Http;
-using System.Net;
 
 using HWA23.Services;
-using System.Linq;
-using HWA.Models;
+using HWA23.Models;
+using System;
+using System.Net.Http;
 
 namespace HWA23.Controllers.API
 {
     [RoutePrefix("api/hotels")]
     public class HotelsAPIController : ApiController
     {
-        [Route("countries"), HttpGet]
-        public async Task<Countries> Countries()
+        [HttpPost]
+        [Route("search")]
+        public async Task<HttpResponseMessage> Search(HotelRequestData model)
         {
-            Countries response = await HotelService.GetMetaData();
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateResponse(ModelState);
+            }
 
-            return response;
-        }
+            // Date String to Date Object.
+            DateTime from = DateTime.Parse(model.CheckIn);
+            DateTime to = DateTime.Parse(model.CheckOut);
+            model.checkInDate = new CheckInDate
+            {
+                day = from.Day,
+                month = from.Month,
+                year = from.Year
+            };
+            model.checkOutDate = new CheckOutDate
+            {
+                day = to.Day,
+                month = to.Month,
+                year = to.Year
+            };
+            model.rooms = new List<Room>
+                {
+                    new Room
+                    {
+                        adults = 1,
+                        children = new List<Child>()
+                    }
+                };
+            model.resultsStartingIndex = 0;
+            model.resultsSize = 25;
 
-        [Route("searchHotels"), HttpGet]
-        public async Task<List<Sr>> SearchHotels(string location)
-        {
-            List<Sr> response = await HotelService.GetAll(location);
-
-            return response;
-        }
-
-        [Route("search"), HttpGet]
-        public async Task<List<Sr>> Search(string location)
-        {
-            List<Sr> response = await HotelService.GetAll(location);
-
-            return response;
+            List<Hotel> response = await HotelService.GetHotelData(model);
+            if (response == null)
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.NotFound);
+            }
+            return Request.CreateResponse(System.Net.HttpStatusCode.OK, response);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace HWA.Models
+namespace HWA23.Models
 {
     public class Coordinates
     {
@@ -51,7 +51,6 @@ namespace HWA.Models
 
     public class Sr
     {
-        [JsonProperty("@type")]
         public string type { get; set; }
         public string index { get; set; }
         public string gaiaId { get; set; }

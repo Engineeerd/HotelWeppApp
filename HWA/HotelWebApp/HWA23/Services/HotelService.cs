@@ -1,49 +1,40 @@
-﻿using HWA.Models;
-using HWA23.Utilities;
+﻿using HWA23.Utilities;
+using HWA23.Models;
 
 using Newtonsoft.Json;
 
-using System.Collections.Generic;
+using System;
+using System.Linq;
+using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace HWA23.Services
 {
     public class HotelService
     {
-        /// <summary>
-        /// - SETS THE HTTP CLIENT AND HEADERS.
-        /// </summary>
-        /// <returns></returns>
-        public static HttpClient SetClient()
-        {
-            HttpClient httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Clear();
-            httpClient.DefaultRequestHeaders.Add("X-RapidAPI-Host", AppSettings.RapidAPIHost);
-            httpClient.DefaultRequestHeaders.Add("X-RapidAPI-Key", AppSettings.RapidAPIKey);
-
-            return httpClient;
-        }
+        static readonly HttpClient httpClient = new HttpClient();
 
         /// <summary>
-        /// - SEARCHES FOR HOTELS.
+        /// - GET REGION RESULTS FROM SEARCH.
         /// </summary>
         /// <returns></returns>
-        public static async Task<List<Sr>> GetAll(string sendData)
+        public static async Task<string> GetRegionId(HotelRequestData model)
         {
             try
             {
-                HttpClient httpClient = SetClient();
-                string url = AppSettings.APIURL + "locations/v3/search?q=" + sendData;
+                httpClient.DefaultRequestHeaders.Clear();
+                httpClient.DefaultRequestHeaders.Add("X-RapidAPI-Host", AppSettings.RapidAPIHost);
+                httpClient.DefaultRequestHeaders.Add("X-RapidAPI-Key", System.Configuration.ConfigurationManager.AppSettings["RapidAPIKey"]);
 
-                var response = await httpClient.GetAsync(url);
+                HttpResponseMessage response = await httpClient.GetAsync($"{AppSettings.APIURL}locations/v3/search?q={model.Location}");
                 if (response.IsSuccessStatusCode)
                 {
                     string result = await response.Content.ReadAsStringAsync();
-                    SearchResponse tempResponse = JsonConvert.DeserializeObject<SearchResponse>(result);
-                    return tempResponse.sr;
+                    SearchResponse searchResponse = JsonConvert.DeserializeObject<SearchResponse>(result);
+                    return searchResponse.sr.FirstOrDefault().gaiaId;
                 }
-                return null;
             }
             catch (HttpRequestException e)
             {
@@ -53,76 +44,63 @@ namespace HWA23.Services
         }
 
         /// <summary>
-        /// - GET ALL COUNTRIES FROM META DATA.
+        /// - GET FILTER HOTELS BY LOCATION AND CHECK IN CHECK OUT DATE.
         /// </summary>
         /// <returns></returns>
-        public static async Task<Countries> SubmitData(string location)
+        public static async Task<List<Hotel>> GetHotelData(HotelRequestData model)
         {
             try
             {
-                HttpClient httpClient = SetClient();
+                httpClient.DefaultRequestHeaders.Clear();
+                HttpRequestMessage requestMessage = new HttpRequestMessage();
 
-                var anonymousObject = new
+                var regionId = await GetRegionId(model);
+                if (regionId == null)
                 {
-                    destination = new { regionId = "6054439" },
-                    checkInDate = new
+                    return null;
+                }
+
+                model.destination = new Destination { regionId = regionId };
+
+                //UriBuilder uriBuilder = new UriBuilder($"https://hotels4.p.rapidapi.com/properties/v2/list");
+                UriBuilder uriBuilder = new UriBuilder($"{AppSettings.APIURL}properties/v2/list");
+                List<Property> properties = new List<Property>();
+
+                if (model != null)
+                {
+                    string json = JsonConvert.SerializeObject(model);
+                    requestMessage.Content = new StringContent(json, Encoding.UTF8, "application/json");
+                }
+
+                requestMessage.Method = HttpMethod.Post;
+                requestMessage.RequestUri = uriBuilder.Uri;
+                requestMessage.Headers.Add("X-RapidAPI-Key", System.Configuration.ConfigurationManager.AppSettings["RapidAPIKey"]);
+                requestMessage.Headers.Add("X-RapidAPI-Host", AppSettings.RapidAPIHost);
+
+                List<Hotel> hotels = new List<Hotel>();
+                HttpResponseMessage result = await httpClient.SendAsync(requestMessage);
+                if (result.IsSuccessStatusCode)
+                {
+                    string response = await result.Content.ReadAsStringAsync();
+                    properties = JsonConvert.DeserializeObject<Root2>(response).data.propertySearch.properties;
+
+                    foreach (Property property in properties)
                     {
-                        day = 10,
-                        month = 10,
-                        year = 2022
-                    },
-                    checkOutDate = new
-                    {
-                        day = 15,
-                        month = 10,
-                        year = 2022
-                    },
-                    rooms = new[] {
-                        new
+                        Hotel hotel = new Hotel
                         {
-                            adults = 2,
-                            children = new[]
-                            {
-                                new { age = 5 },
-                                new { age = 7 }
-                            }
+                            Id = Int32.Parse(property.id),
+                            Name = property.name,
+                            Price = property.price.lead.amount,
+                            Image = property.propertyImage.image.url.ToString(),
+                            Available = property.availability.available,
+                            RegionId = double.Parse(property.destinationInfo.regionId)
+                        };
+                        if (!(hotels.Any(h => h.Id == hotel.Id))) { 
+                            hotels.Add(hotel);
                         }
                     }
-                };
-                List<Sr> list = await GetAll(location);
-
-                string url = AppSettings.APIURL + "properties/v2/list";
-                HttpResponseMessage response = await httpClient.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Countries>(result);
                 }
-            }
-            catch (HttpRequestException e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message);
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// - GET ALL COUNTRIES FROM META DATA.
-        /// </summary>
-        /// <returns></returns>
-        public static async Task<Countries> GetMetaData()
-        {
-            try
-            {
-                HttpClient httpClient = SetClient();
-
-                string url = AppSettings.APIURL + "v2/get-meta-data";
-                HttpResponseMessage response = await httpClient.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Countries>(result);
-                }
+                return hotels;
             }
             catch (HttpRequestException e)
             {

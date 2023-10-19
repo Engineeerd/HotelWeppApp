@@ -1,50 +1,47 @@
 ﻿@{
-    ViewBag.Title = " Home ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<main>
-    <h1> HOTELS SEARCH </h1>
-    <br>
-    <div>
-        <form id="form-data">
-            <div class="form-group">
-                <label for="location">Where</label>
-                <input type="text" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="checkIn">Check In</label>
-                <input type="text" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="checkOut">Check Out</label>
-                <input type="text" class="form-control">
-            </div>
-
-            <br />
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+<main role="main">
+    <div class="bg-body-tertiary rounded-3">
+        <div class="container">
+            <h1 class="display-3"> HOTEL FINDER </h1>
+            <form>
+                <div class="form-group">
+                    <p>Discover the perfect stay for your next trip with our hotel search service. Whether you're planning a vacation or a business trip, our user-friendly platform allows you to find and book hotels in any city. Simply enter your destination, along with your check-in and check-out dates, and we'll provide you with a curated list of hotels that match your preferences. Our platform helps you compare prices, amenities, and guest reviews, ensuring that you make the best choice for your stay. Start planning your next adventure with our hotel search tool and make your travel experience memorable.</p>
+                    <h5 class="messageText"> {{ message }} </h5>
+                    <div class="date-pickers">
+                        <div class="check-in-datepicker">
+                            <label for="check-in"> Check In : </label>
+                            <input type="date" id="check-in" class="date-picker-form-control" v-model="checkInDate" :min="new Date().toISOString().slice(0, 10)" />
+                        </div>
+                        <div class="check-out-datepicker">
+                            <label for="check-out"> Check Out : </label>
+                            <input type="date" id="check-out" class="date-picker-form-control" v-model="checkOutDate" :min="new Date().toISOString().slice(0, 10)" />
+                        </div>
+                    </div>
+                    <input type="text" id="locationInput" class="form-control search-input" v-model="location" placeholder="Location Search..." v-bind:disabled="isSearchDisabled">
+                    <small id="locationHelp" class="form-text text-muted"> Enter The Name of Countries, Cities, Districts, Places, Etc… </small>
+                </div>
+                <div class="search-button-div">
+                    <button type="submit" class="btn btn-primary search-button" v-on:click="locationSubmit">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
+    <!-- CARDS -->
+    <div class="container">
+        <div class="row">
+            <div class="card" v-for="(hotel,id) in hotels" v-bind:key="hotel.id">
+                <div class="card-image">
+                    <img :src="hotel.Image" alt="Card Image" height="180" width="180">
+                </div>
+                <div class="card-description">
+                    <p class="hotel-title"> {{ hotel.Name }} </p>
+                    <p> PRICE: ${{ hotel.Price.toFixed(2) }} </p>
+                    <p> ROOMS AVAILABLE: {{ hotel.Available == true ? "Yes" : "No" }}</p>
+                </div>
+            </div>
+        </div>
+    </div><!-- /container -->
 </main>
-
-@section Scripts {
-    <script setup>
-        //import axios from 'axios';
-        //import { onMounted, ref } from "vue";
-
-        const obj = ref({});
-
-        axios({
-            method: 'get',
-            url: 'api/hotels/countries',
-            responseType: 'stream'
-        }).then(function (response) {
-            var responseObject = JSON.parse(response.data);
-            console.log(response.data);
-            console.log(responseObject);
-
-            obj.value = responseObject;
-        });
-    </script>
-}
