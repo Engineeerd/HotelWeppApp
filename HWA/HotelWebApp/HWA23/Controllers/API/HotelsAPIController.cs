@@ -16,6 +16,11 @@ namespace HWA23.Controllers.API
         [Route("search")]
         public async Task<HttpResponseMessage> Search(HotelRequestData model)
         {
+            if (System.Configuration.ConfigurationManager.AppSettings["RapidAPIKey"] == null)
+            {
+                return Request.CreateResponse(System.Net.HttpStatusCode.Unauthorized);
+            }
+
             if (!ModelState.IsValid)
             {
                 return Request.CreateResponse(ModelState);

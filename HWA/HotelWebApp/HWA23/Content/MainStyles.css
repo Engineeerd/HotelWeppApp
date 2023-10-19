@@ -5,7 +5,7 @@ body {
     font-family: 'lato', sans-serif !important;
 }
 
-.loader {
+.loader-background {
     background-color: rgba(0, 0, 0, 0.95);
     position: fixed;
     overflow: hidden;
@@ -21,6 +21,27 @@ body {
     justify-content: center;
     align-items: center;
     color: whitesmoke;
+}
+
+.loader {
+    border-top: 16px solid #990000;
+    border-right: 16px solid #FFC72C;
+    border-bottom: 16px solid #990000;
+    border-left: 16px solid #FFC72C;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .bg-dark {
@@ -73,6 +94,10 @@ main {
     align-content: center;
     justify-content: center;
     align-items: center;
+}
+
+.p-note {
+    color: #FFC72C;
 }
 
 .date-pickers {
