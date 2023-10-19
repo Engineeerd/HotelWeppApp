@@ -9,32 +9,33 @@
     @Styles.Render("~/Content/css")
 </head>
 <body>
-    @* VUE.JS *@
-    <script type="importmap"> {"imports":{"vue":"https://unpkg.com/vue@3/dist/vue.esm-browser.js"}}</script>
+    @* VUE.JS PRODUCTION *@
+    <script type="importmap"> {"imports":{"vue":"https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js"}}</script>
 
     @* APP INDEX PAGE *@
-    <div id="app">
+<div id="app">
 
-        @* NAVBAR *@
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link"> Home <span class="sr-only"></span></a>
-                    </li>
-                </ul>
-                <form class="nav-search-div">
-                    <input type="text" class="nav-search-input" v-model="locationNav" placeholder="Location Search..." v-bind:disabled="isNavSearchDisabled">
-                    <button class="btn btn-outline-success" type="submit" v-on:click="locationSubmit"> Search </button>
-                </form>
-            </div>
-        </nav>
-        @* LOADER *@
-        <div class="loader" v-show="isLoading"><h1>{{ loadingText }}</h1></div>
+    @* NAVBAR *@
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link"> Home <span class="sr-only"></span></a>
+                </li>
+            </ul>
+            <form class="nav-search-div">
+                <input type="text" class="nav-search-input" v-model="locationNav" placeholder="Location Search..." v-bind:disabled="isNavSearchDisabled" />
+                <button class="btn btn-outline-success" v-on:click="locationNavSubmit"> Search </button>
+            </form>
+        </div>
+    </nav>
 
-        @*VIEW PAGES*@
-        @RenderBody()
-    </div>
+    @* LOADER *@
+    <div class="loader-background" v-show="isLoading"><div class="loader" v-show="true"></div> <p> LOADING... </p> </div>
+
+    @*VIEW PAGES*@
+    @RenderBody()
+</div>
 
     @* JAVASCRIPT FILES *@
     <script type="module" src="~/Scripts/VUE/app.js"></script>
