@@ -2,15 +2,17 @@
 
 namespace HotelWebApp.App_Start
 {
-    public class HWAConfig
+    public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
-            // WEB API Routes.
+            // Web API configuration and services
+
+            // Web API routes
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/v1/{controller}",
+                routeTemplate: "api/v1/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }

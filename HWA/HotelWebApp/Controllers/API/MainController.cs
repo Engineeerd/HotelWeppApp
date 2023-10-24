@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace HotelWebApp.Controllers
+namespace HotelWebApp.Controllers.API
 {
     public class MainController : ApiController
     {
