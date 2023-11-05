@@ -118,22 +118,56 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="SPA\src\assets\base.css" />
-    <Content Include="SPA\src\assets\favicon.ico" />
+    <Content Include="SPA\src\assets\theme.css" />
+    <Content Include="SPA\src\components\card.js" />
+    <Content Include="SPA\src\components\loader.js" />
+    <Content Include="SPA\src\images\favicon.ico" />
     <Content Include="SPA\src\assets\main.css" />
     <Content Include="SPA\src\index.html" />
-    <Content Include="SPA\src\scripts\main.js" />
+    <Content Include="SPA\src\views\content.js" />
+    <Content Include="SPA\src\views\main.js" />
+    <Content Include="SPA\src\components\navbar.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\API\MainController.cs" />
+    <Compile Include="Controllers\API\HotelsAPIController.cs" />
     <Compile Include="Controllers\SPAController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Property.cs" />
+    <Compile Include="Models\Property\DestinationInfo.cs" />
+    <Compile Include="Models\Property\DistanceFromDestination.cs" />
+    <Compile Include="Models\Property\FallbackImage.cs" />
+    <Compile Include="Models\Property\Image.cs" />
+    <Compile Include="Models\Property\Lead.cs" />
+    <Compile Include="Models\Property\PropertyImage.cs" />
+    <Compile Include="Models\Search\PropertySearch.cs" />
+    <Compile Include="Models\Property\Availability.cs" />
+    <Compile Include="Models\Property\CheckInDate.cs" />
+    <Compile Include="Models\Property\CheckOutDate.cs" />
+    <Compile Include="Models\Property\Child.cs" />
+    <Compile Include="Models\Property\Destination.cs" />
+    <Compile Include="Models\Hotel.cs" />
+    <Compile Include="Models\Property\DisplayMessage.cs" />
+    <Compile Include="Models\Property\Price.cs" />
+    <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\Search\Coordinates.cs" />
+    <Compile Include="Models\Search\Country.cs" />
+    <Compile Include="Models\Search\EssId.cs" />
+    <Compile Include="Models\Search\HierarchyInfo.cs" />
+    <Compile Include="Models\Search\HotelAddress.cs" />
+    <Compile Include="Models\Search\RegionNames.cs" />
+    <Compile Include="Models\_Requests\HotelRequest.cs" />
+    <Compile Include="Models\_Responses\HotelResponse.cs" />
+    <Compile Include="Models\_Responses\LocationResponse.cs" />
+    <Compile Include="Models\_Responses\SearchResponse.cs" />
+    <Compile Include="Models\Property\Room.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\HotelService.cs" />
+    <Compile Include="Utilities\AppSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -147,10 +181,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
-    <Folder Include="SPA\src\components\" />
     <Folder Include="SPA\src\data\" />
     <Folder Include="SPA\src\router\" />
-    <Folder Include="SPA\src\views\" />
+    <Folder Include="SPA\src\scripts\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

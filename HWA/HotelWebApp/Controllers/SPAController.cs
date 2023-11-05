@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using System.Linq;
-using System.Web;
-using System;
+﻿using System.Web.Mvc;
 
 namespace HotelWebApp.Controllers
 {

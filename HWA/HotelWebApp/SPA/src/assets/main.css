@@ -1,1 +1,206 @@
-﻿/*@import './base.css';*/
+﻿/* BODY */
+body {
+    background-color: hsl(var(--clr-dark-gray));
+    font-family: 'lato', sans-serif !important;
+}
+
+/* NAVIGATION BAR */
+nav {
+    background-color: hsl(var(--clr-black));
+    overflow: hidden;
+    min-width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+}
+
+    nav .nav-links a {
+        float: left;
+        color: hsl(var(--clr-blue));
+        text-align: center;
+        padding: 0.85rem 2rem;
+        text-decoration: none;
+        font-size: large;
+    }
+
+        nav .nav-links a:hover {
+            background-color: #DDD;
+            color: black;
+        }
+
+        nav .nav-links a.active {
+            background-color: hsl(var(--clr-blue));
+            font-weight: bold;
+            color: white;
+        }
+
+/* NAVIGATION BAR SEARCH */
+.nav-search-div {
+    display: flex;
+    margin-right: 0.5rem;
+}
+
+/* PAGE LOADER */
+.loader-background {
+    background-color: rgba(0, 0, 0, 0.95);
+    position: fixed;
+    overflow: hidden;
+    min-width: 100vw;
+    max-width: 100vw;
+    min-height: 100vh;
+    max-height: 100vh;
+    z-index: 1060;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+}
+
+.loader {
+    animation: spin 2s linear infinite;
+    border-top: 0.625rem solid hsl(var(--clr-blue));
+    border-right: 0.625rem solid hsl(var(--clr-red));
+    border-bottom: 0.625rem solid hsl(var(--clr-green));
+    border-left: 0.625rem solid hsl(var(--clr-yellow));
+    border-radius: 50%;
+    height: 4.6rem;
+    width: 4.6rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.title {
+    color: deepskyblue;
+    font-weight: bold;
+    padding-top: 1.5rem;
+    margin-bottom: 0.6rem;
+}
+
+.container {
+    background-color: hsl(var(--clr-gray));
+    color: aliceblue;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-bottom: 1.5rem;
+    border-bottom-left-radius: 0.6rem 0.6rem;
+    border-bottom-right-radius: 0.6rem 0.6rem;
+}
+
+.p-note {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: burlywood;
+}
+
+.text-muted {
+    font-size: x-small;
+    color: white !important;
+}
+
+.message-text {
+    font-style: italic;
+    text-align: center;
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+    color: red;
+}
+
+.input-content-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+
+.search-div {
+    width: 80%;
+}
+
+.search-button {
+    background-color: hsl(var(--clr-blue)) !important;
+    color: aliceblue !important;
+    margin-top: 1rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+}
+
+.check-in-datepicker, .check-out-datepicker {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+    .check-in-datepicker label, .check-out-datepicker label {
+        margin-right: 0.5rem;
+    }
+
+/* CARDS */
+.card-container {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1.5rem;
+}
+
+    .card-container .row {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+        .card-container .row > * {
+            min-width: 47.20%;
+            max-width: 47.20%;
+        }
+
+.card {
+    background-color: hsl(var(--clr-light-white));
+    border: 0.1rem solid hsl(var(--clr-blue));
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    display: flex;
+    margin: 0.2rem;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+    .card .card-image {
+        margin-right: 1rem;
+    }
+
+        .card .card-image img {
+            background-size: 100% 100%;
+            object-fit: cover;
+        }
+
+    .card .card-description .hotel-title {
+        font-weight: bold;
+    }
+
+    .card card-description p {
+        margin-bottom: 0rem !important;
+    }
