@@ -1,0 +1,86 @@
+﻿:root {
+    --clr-blue: 206 67% 48%;
+    --clr-red: 5, 69%, 54%;
+    --clr-green: 151, 83%, 34%;
+    --clr-yellow: 44, 100%, 48%;
+    --clr-dark: 230 35% 7%;
+    --clr-black: 0 0% 0%;
+    --clr-white: 0 0% 100%;
+    --clr-gray: 0, 0%, 25%;
+    --clr-dark-gray: 0, 0%, 9%;
+    --clr-light: 231 77% 90%;
+    --clr-light-dark: 60 2% 19%;
+    --clr-light-white: 46 95% 97%;
+    --fs-900: 9.375rem;
+    --fs-800: 6.25rem;
+    --fs-700: 3.5rem;
+    --fs-600: 2rem;
+    --fs-500: 1.75rem;
+    --fs-400: 1.125rem;
+    --fs-300: 1rem;
+    --fs-200: 0.875rem;
+    --width-100: 100%;
+    --width-50: 50%;
+    --border-radius: 0.5rem;
+    --ff-roboto: "Roboto", sans-serif;
+    --ff-roboto-slab: "Roboto Slab", sans-serif;
+    --ff-roboto-condensed: "Roboto Condensed", sans-serif;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+picture,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+input[type=text] {
+    border: 0.1rem solid hsl(var(--clr-blue));
+    border-radius: var(--border-radius);
+    padding: 0.375rem 0.75rem;
+    display: block;
+    width: 100%;
+    min-height: 50%;
+    max-height: 50%;
+    margin-top: 0.25rem;
+    margin-right: 0.2rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.0;
+    cursor: pointer;
+}
+
+input[type=date] {
+    border: 0.09rem solid hsl(var(--clr-blue));
+    padding: 0.375rem 0.75rem;
+    background-color: hsl(var(--clr-white));
+    background-clip: padding-box;
+    border-radius: var(--border-radius);
+    min-height: 50%;
+    max-height: 50%;
+    width: 50%;
+    cursor: pointer;
+}
+
+button {
+    border: 0.1rem solid hsl(var(--clr-blue));
+    border-radius: var(--border-radius);
+    background-color: transparent;
+    color: hsl(var(--clr-blue));
+    vertical-align: middle;
+    text-align: center;
+    font-size: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    cursor: pointer;
+}
